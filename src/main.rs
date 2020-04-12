@@ -1,37 +1,46 @@
+#![feature(plugin, const_fn, decl_macro, proc_macro_hygiene)]
+#![allow(proc_macro_derive_resolution_fallback, unused_attributes)]
+
 #[macro_use]
 extern crate diesel;
 
+#[macro_use]
+extern crate custom_derive;
+
 extern crate dotenv;
+extern crate r2d2;
+extern crate r2d2_diesel;
+#[macro_use]
+extern crate rocket;
+extern crate rocket_contrib;
+#[macro_use]
+extern crate serde_derive;
+#[macro_use]
+extern crate serde_json;
 
 use dotenv::dotenv;
 use std::env;
-use diesel::prelude::*;
-use diesel::pg::PgConnection;
+use routes::*;
 
-mod schema;
+mod db;
 mod models;
+mod routes;
+mod schema;
 
-fn main() {
+fn rocket() -> rocket::Rocket {
     dotenv().ok();
 
     let database_url = env::var("DATABASE_URL").expect("set DATABASE_URL");
-    let conn = PgConnection::establish(&database_url).unwrap();
 
-    let user = models::NewUser {
-        username: String::from("Nemo"),
-        password: String::from("123"),
-        first_name: String::from("Nemo S"),
-    };
+    let pool = db::init_pool(database_url);
+    rocket::ignite()
+        .manage(pool)
+        .mount(
+            "/api/v1/",
+            routes![index, new],
+        )
+}
 
-    if models::User::insert(user, &conn) {
-        println!("success");
-    } else {
-        println!("failed");
-    }
-
-//    if models::User::isLoginSuccess(String::from("Nemo"), String::from("123"), &conn) {
-//        println!("success");
-//    } else {
-//        println!("failed");
-//    }
+fn main() {
+    rocket().launch();
 }
