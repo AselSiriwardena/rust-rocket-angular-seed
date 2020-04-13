@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "11.0"
+branches:
+  only:
+    - master
+    - AngularUI
+before_script:
+  - npm install -g @angular/cli
+script:
+  - cd ui
+  - npm install
+  - npm run build
+deploy:
+  skip_cleanup: true
+  provider: page
+  token:GITHUB_TOKEN
+    on:
+      branch: AngularUI
