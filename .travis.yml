@@ -1,18 +1,17 @@
 language: node_js
 node_js:
   - "11.0"
-before_install:
-  - cd ui
 before_script:
+  - cd ui
   - npm install -g @angular/cli
 script:
   - npm install
   - npm run build
   - ng --prod build
 deploy:
-  skip_cleanup: true
   provider: page
+  skip_cleanup: true
   token: $GITHUB_TOKEN
-  local_dir: build
+  local_dir: ./build/
     on:
       branch: Feature-branch-travis
