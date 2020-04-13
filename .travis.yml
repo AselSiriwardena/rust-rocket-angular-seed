@@ -1,19 +1,18 @@
 language: node_js
 node_js:
   - "11.0"
-branches:
-  only:
-    - master
-    - AngularUI
+before_install:
+  - cd ui
 before_script:
   - npm install -g @angular/cli
 script:
-  - cd ui
   - npm install
   - npm run build
+  - ng --prod build
 deploy:
   skip_cleanup: true
   provider: page
   token:GITHUB_TOKEN
+  local_dir: build
     on:
-      branch: AngularUI
+      branch: Feature-branch-travis
