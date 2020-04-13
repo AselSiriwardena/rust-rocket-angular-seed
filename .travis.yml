@@ -1,18 +1,33 @@
-language: node_js
-node_js:
-  - "10.13"
-before_script:
-  - cd ui
-  - npm install -g @angular/cli
-script:
-  - npm install
-  - npm run build
+matrix:
+  include:
+    language: node_js
+    node_js:
+      - "10.13"
+    before_script:
+      - cd ui
+      - npm install -g @angular/cli
+    script:
+      - npm install
+      - npm run build
 
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep_history: true
-  local_dir: dist
-  on:
-    branch: master
+    deploy:
+      provider: pages
+      skip_cleanup: true
+      github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+      keep_history: true
+      local_dir: dist
+      on:
+        all_branches: true
+
+    -language: rust
+    rust:
+      - stable
+      - beta
+      - nightly
+    jobs:
+      allow_failures:
+        - rust: nightly
+      fast_finish: true
+notifications:
+  email:
+    - aselindula@gmail.com
