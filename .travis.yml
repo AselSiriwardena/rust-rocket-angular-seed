@@ -1,19 +1,28 @@
-language: node_js
-node_js:
-  - "11.0"
-branches:
-  only:
-    - master
-    - AngularUI
-before_script:
-  - npm install -g @angular/cli
-script:
-  - cd ui
-  - npm install
-  - npm run build
-deploy:
-  skip_cleanup: true
-  provider: page
-  token:GITHUB_TOKEN
-    on:
-      branch: AngularUI
+matrix:
+  include:
+    - language: rust
+      rust:
+        - nightly
+      jobs:
+        allow_failures:
+          - rust: nightly
+        fast_finish: true
+
+    - language: node.js
+      node_js: "12.0"
+      before_script:
+        - cd ui
+      script:
+        - npm install
+        - npm run build
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+        keep_history: true
+        local_dir: dist
+        on:
+          all_branches: true
+
+notifications:
+  email: aselindula@gmail.com
