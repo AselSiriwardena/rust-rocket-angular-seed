@@ -12,7 +12,7 @@ script:
 deploy:
   skip_cleanup: true
   provider: page
-  token:GITHUB_TOKEN
+  token: $GITHUB_TOKEN
   local_dir: build
     on:
       branch: Feature-branch-travis
