@@ -7,11 +7,8 @@ before_script:
 script:
   - npm install
   - npm run build
-  - ng --prod build
 deploy:
   provider: page
   skip_cleanup: true
   token: $GITHUB_TOKEN
-  local_dir: ./build/
-    on:
-      branch: Feature-branch-travis
+  local_dir: dist
