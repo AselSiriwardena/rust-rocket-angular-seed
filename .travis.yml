@@ -14,14 +14,13 @@ matrix:
         - cd ui
       script:
         - npm install
-        - npm run build
-        - ng build --prod --base-href https://aselsiriwardena.github.io/rust-rocket-angular-seed
+        - ng build --prod --base-href https://aselsiriwardena.github.io/rust-rocket-angular-seed/
       deploy:
         provider: pages
         skip_cleanup: true
         github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
         keep_history: true
-        local_dir: dist/ui
+        local_dir: ./ui/dist/ui/
         on:
           all_branches: true
 

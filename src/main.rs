@@ -21,6 +21,7 @@ extern crate serde_json;
 use dotenv::dotenv;
 use std::env;
 use routes::*;
+use std::process::Command;
 
 mod db;
 mod models;
@@ -37,10 +38,23 @@ fn rocket() -> rocket::Rocket {
         .manage(pool)
         .mount(
             "/api/v1/",
-            routes![index, new],
+            routes![index, new, get_user],
         )
 }
 
 fn main() {
+
+    let output = if cfg!(target_os = "windows") {
+        Command::new("cmd")
+            .args(&["/C", "cd ui && npm start"])
+            .spawn()
+            .expect("Failed to start UI Application")
+    } else {
+        Command::new("sh")
+            .arg("-c")
+            .arg("cd ui && npm start")
+            .spawn()
+            .expect("Failed to start UI Application")
+    };
     rocket().launch();
 }
