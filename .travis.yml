@@ -14,7 +14,7 @@ matrix:
         - cd ui
       script:
         - npm install
-        - ng build --prod --base-href https://aselsiriwardena.github.io/rust-rocket-angular-seed
+        - ng build --prod --base-href https://aselsiriwardena.github.io/rust-rocket-angular-seed/
       deploy:
         provider: pages
         skip_cleanup: true

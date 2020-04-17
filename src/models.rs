@@ -13,6 +13,11 @@ pub struct User {
     pub first_name: String,
 }
 
+#[derive(Deserialize)] // this is to get users from the database
+pub struct UserData {
+    pub username: String,
+}
+
 #[derive(Serialize, Deserialize, Insertable)] // this is to insert users to database
 #[table_name = "users"]
 pub struct NewUser {
@@ -43,5 +48,13 @@ impl User {
             .execute(conn)
             .is_ok()
     }
+
+    pub fn get_by_username(user: UserData, conn: &PgConnection) -> Vec<User> {
+        all_users
+            .filter(users::username.eq(user.username))
+            .load::<User>(conn)
+            .expect("error loading the books")
+    }
+
 
 }
