@@ -22,13 +22,18 @@ use routes::*;
 use std::process::Command;
 use rocket_cors::{
     AllowedOrigins,
-    Cors, CorsOptions
+    Cors, CorsOptions,
 };
 
 mod db;
 mod models;
 mod routes;
 mod schema;
+
+fn main() {
+    start_ui();
+    rocket().launch();
+}
 
 fn rocket() -> rocket::Rocket {
     dotenv().ok();
@@ -45,24 +50,6 @@ fn rocket() -> rocket::Rocket {
         .attach(make_cors())
 }
 
-fn main() {
-
-    let _output = if cfg!(target_os = "windows") {
-        Command::new("cmd")
-            .args(&["/C", "cd ui && npm start"])
-            .spawn()
-            .expect("Failed to start UI Application")
-    } else {
-        Command::new("sh")
-            .arg("-c")
-            .arg("cd ui && npm start")
-            .spawn()
-            .expect("Failed to start UI Application")
-    };
-    rocket().launch();
-}
-
-
 fn make_cors() -> Cors {
     let allowed_origins = AllowedOrigins::some_exact(&[
         "http://localhost:4200",
@@ -76,4 +63,19 @@ fn make_cors() -> Cors {
     }
         .to_cors()
         .expect("error while building CORS")
+}
+
+fn start_ui() {
+    let _output = if cfg!(target_os = "windows") {
+        Command::new("cmd")
+            .args(&["/C", "cd ui && npm start"])
+            .spawn()
+            .expect("Failed to start UI Application")
+    } else {
+        Command::new("sh")
+            .arg("-c")
+            .arg("cd ui && npm start")
+            .spawn()
+            .expect("Failed to start UI Application")
+    };
 }
