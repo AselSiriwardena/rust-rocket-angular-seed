@@ -8,12 +8,13 @@ import { APPService } from './shared/app.service';
 })
 export class AppComponent {
   constructor(private appService: APPService) {}
-  title = 'ui';
+  title = 'rust-rocket-angular-seed';
 
-  modelAdd: any = {};
-  modelGet: any = {};
+  public modelAdd: any = {};
+  public modelGet: any = {};
+  public getAll = true;
 
-  addUsers() {
+  public addUsers(): void {
     this.appService.addUser(this.modelAdd).subscribe(
       (data: any) => {
         console.log(data);
@@ -21,12 +22,22 @@ export class AppComponent {
     );
   }
 
-  getUsers() {
-    this.appService.getAllUsers().subscribe(
-      (data: any) => {
-        console.log(data);
-        this.modelGet.allUsers = JSON.stringify(data);
-      }
-    );
+  public getUsers(): void {
+    if (!this.getAll) {
+      this.appService.getAllUsers().subscribe(
+          (data: any) => {
+            console.log(data);
+            this.modelGet.allUsers = JSON.stringify(data);
+          }
+      );
+    } else {
+      this.appService.getBuyUsername(this.modelGet).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.modelGet.allUsers = JSON.stringify(data);
+          }
+      );
+    }
+
   }
 }

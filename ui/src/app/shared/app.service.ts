@@ -37,4 +37,16 @@ export class APPService {
         );
     }
 
+    getBuyUsername(model: any): any {
+        const body = JSON.stringify({ username: model.username });
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        const options = { headers };
+        return this.httpClient.post('http://localhost:8000/api/v1/getUser', body, options)
+            .map(response => {
+                    const data: any = response;
+                    return data;
+                }
+            );
+    }
+
 }

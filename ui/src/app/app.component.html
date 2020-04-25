@@ -1,85 +1,94 @@
-
-
-  <mat-grid-list cols="2" rowHeight="2:2" [ngStyle]="">
-
-    <mat-grid-tile>
-
-      <div class="jumbotron col-md-10">
+<div class="base-container">
+  <div class="row">
+    <div class="col">
+      <div class="card">
         <div class="container">
-          <div class="row">
-            <div class="col-md-8 offset-md-2">
-              <h3>Add new User</h3>
-              <form name="form" (ngSubmit)="f.form.valid && addUsers()" #f="ngForm" novalidate>
-                <div class="form-group">
-                  <label>First Name</label>
-                  <input type="text" class="form-control" name="firstName" [(ngModel)]="modelAdd.first_name"
-                         #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required/>
-                  <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
-                    <div *ngIf="firstName.errors.required">First Name is required</div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-10 offset-md-1">
+                <h3 class="card-title">Add new User</h3>
+                <form name="form" (ngSubmit)="f.form.valid && addUsers()" #f="ngForm" novalidate>
+                  <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" name="firstName" [(ngModel)]="modelAdd.first_name"
+                           #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }"
+                           required/>
+                    <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+                      <div *ngIf="firstName.errors.required">First Name is required</div>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="text" class="form-control" name="email" [(ngModel)]="modelAdd.username" #username="ngModel"
-                         required/>
-                  <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
-                    <div *ngIf="username.errors.required">User Name is required</div>
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="email" [(ngModel)]="modelAdd.username"
+                           #username="ngModel"
+                           required/>
+                    <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
+                      <div *ngIf="username.errors.required">User Name is required</div>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" class="form-control" name="password" [(ngModel)]="modelAdd.password"
-                         #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required/>
-                  <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
-                    <div *ngIf="password.errors.required">Password is required</div>
+                  <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" [(ngModel)]="modelAdd.password"
+                           #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required/>
+                    <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                      <div *ngIf="password.errors.required">Password is required</div>
+                    </div>
                   </div>
-                </div>
 
-                <div class="form-group">
-                  <button class="btn btn-primary">Submit</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-
-      <div class="jumbotron col-md-10" style="padding-top: 120px; padding-bottom: 120px;">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-10 offset-md-1">
-              <div class="row ">
-                <div class="col-md-5">
-                  <h3>Get Users</h3>
-                </div>
-                <div class="col-md-5">
-                    <mat-checkbox>Get by username</mat-checkbox>
+                  <div class="form-group">
+                    <button class="btn btn-info">POST</button>
                   </div>
+                </form>
               </div>
-              <form name="form" (ngSubmit)="getUsers()" novalidate>
-                <div class="form-group">
-                  <label >User Name</label>
-                  <input type="text" class="form-control" name="username" #username="ngModel" [(ngModel)]="modelGet.username" [ngClass]="{ 'is-invalid': f.submitted }" required />
-                  <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
-                    <div *ngIf="username.errors.required">First Name is required</div>
-                  </div>
-                  <textarea class="form-control" name="allUsers" [(ngModel)]="modelGet.allUsers" placeholder="all users"></textarea>
-                </div>
-
-                <div class="form-group">
-                  <button class="btn btn-primary">Register</button>
-                </div>
-              </form>
             </div>
           </div>
         </div>
       </div>
-    </mat-grid-tile>
+    </div>
 
-  </mat-grid-list>
+
+    <div class="col">
+      <div class="card">
+        <div class="container">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-10 offset-md-1">
+                <div class="row ">
+                  <div class="col-md-6">
+                    <h3>Get Users</h3>
+                  </div>
+                  <div class="col-md-4 custom-control custom-checkbox">
+                    <div >
+                      <input [(ngModel)]="getAll" type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                      <label class="custom-control-label" for="defaultUnchecked">Get by Username</label>
+                    </div>
+                  </div>
+                </div>
+                <form name="form" (ngSubmit)="getUsers()" >
+                  <div class="form-group">
+
+                    <label *ngIf="getAll">Username</label>
+                    <input *ngIf="getAll" type="text" class="form-control" name="username" #username="ngModel"
+                           [(ngModel)]="modelGet.username" [ngClass]="{ 'is-invalid': f.submitted }" required/>
+                    <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
+                      <div *ngIf="username.errors.required">First Name is required</div>
+                    </div>
+                    <br>
+                    <textarea style="height: 250px;"  class="form-control" name="allUsers" [(ngModel)]="modelGet.allUsers"
+                              placeholder="JSON response"></textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <button class="btn btn-info">Request</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
