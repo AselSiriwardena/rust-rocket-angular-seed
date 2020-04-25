@@ -3,6 +3,7 @@
 # Rust Rocket Angular Seed
 
 Use rocket framework to develop the web application backend/services and frontend using Angular CLI, all in a totally integrated workflow and single unified console. This approach will deliver perfect development experience without CORS hassle. 
+For more understanding, read [rest-api-in-rust-step-by-step-guide](https://medium.com/better-programming/rest-api-in-rust-step-by-step-guide-b8a6c5fcbff0).
 
 ## Built With
 
@@ -54,6 +55,3 @@ See also the list of [contributors](https://github.com/AselSiriwardena/rust-rock
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* If more clarifications needed, read [rest-api-in-rust-step-by-step-guide](https://medium.com/better-programming/rest-api-in-rust-step-by-step-guide-b8a6c5fcbff0).
