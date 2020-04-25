@@ -1,4 +1,5 @@
-[![MIT License][license-badge]][LICENSE]
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # Rust Rocket Angular Seed
 
 Use rocket framework to develop the web application backend/services and frontend using Angular CLI, all in a totally integrated workflow and single unified console. This approach will deliver perfect development experience without CORS hassle. 
