@@ -1,10 +1,10 @@
 
 
-  <mat-grid-list cols="2" rowHeight="2:1" [ngStyle]="">
+  <mat-grid-list cols="2" rowHeight="2:2" [ngStyle]="">
 
     <mat-grid-tile>
 
-      <div class="jumbotron">
+      <div class="jumbotron col-md-10">
         <div class="container">
           <div class="row">
             <div class="col-md-8 offset-md-2">
@@ -49,15 +49,21 @@
 
     <mat-grid-tile>
 
-      <div class="jumbotron">
+      <div class="jumbotron col-md-10" style="padding-top: 120px; padding-bottom: 120px;">
         <div class="container">
           <div class="row">
-            <div class="col-md-8 offset-md-2">
-              <h3>Get Users</h3>
+            <div class="col-md-10 offset-md-1">
+              <div class="row ">
+                <div class="col-md-5">
+                  <h3>Get Users</h3>
+                </div>
+                <div class="col-md-5">
+                    <mat-checkbox>Get by username</mat-checkbox>
+                  </div>
+              </div>
               <form name="form" (ngSubmit)="getUsers()" novalidate>
                 <div class="form-group">
                   <label >User Name</label>
-                  <mat-checkbox>Get by username</mat-checkbox>
                   <input type="text" class="form-control" name="username" #username="ngModel" [(ngModel)]="modelGet.username" [ngClass]="{ 'is-invalid': f.submitted }" required />
                   <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
                     <div *ngIf="username.errors.required">First Name is required</div>
