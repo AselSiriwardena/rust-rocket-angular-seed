@@ -4,9 +4,6 @@
 #[macro_use]
 extern crate diesel;
 
-#[macro_use]
-extern crate custom_derive;
-
 extern crate dotenv;
 extern crate r2d2;
 extern crate r2d2_diesel;
@@ -18,10 +15,15 @@ extern crate serde_derive;
 #[macro_use]
 extern crate serde_json;
 
+use rocket::http::Method;
 use dotenv::dotenv;
 use std::env;
 use routes::*;
 use std::process::Command;
+use rocket_cors::{
+    AllowedOrigins,
+    Cors, CorsOptions
+};
 
 mod db;
 mod models;
@@ -38,13 +40,14 @@ fn rocket() -> rocket::Rocket {
         .manage(pool)
         .mount(
             "/api/v1/",
-            routes![index, new, get_user],
+            routes![get_all, new_user, find_user],
         )
+        .attach(make_cors())
 }
 
 fn main() {
 
-    let output = if cfg!(target_os = "windows") {
+    let _output = if cfg!(target_os = "windows") {
         Command::new("cmd")
             .args(&["/C", "cd ui && npm start"])
             .spawn()
@@ -57,4 +60,20 @@ fn main() {
             .expect("Failed to start UI Application")
     };
     rocket().launch();
+}
+
+
+fn make_cors() -> Cors {
+    let allowed_origins = AllowedOrigins::some_exact(&[
+        "http://localhost:4200",
+    ]);
+
+    CorsOptions { // 5.
+        allowed_origins,
+        allowed_methods: vec![Method::Post].into_iter().map(From::from).collect(),
+        allow_credentials: false,
+        ..Default::default()
+    }
+        .to_cors()
+        .expect("error while building CORS")
 }

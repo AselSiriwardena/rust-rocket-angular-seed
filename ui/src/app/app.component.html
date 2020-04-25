@@ -1,6 +1,79 @@
 
-<body>
-  <h1>fuck you</h1>
-  {{data}}
-</body>
+
+  <mat-grid-list cols="2" rowHeight="2:1" [ngStyle]="">
+
+    <mat-grid-tile>
+
+      <div class="jumbotron">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              <h3>Add new User</h3>
+              <form name="form" (ngSubmit)="f.form.valid && addUsers()" #f="ngForm" novalidate>
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" name="firstName" [(ngModel)]="modelAdd.first_name"
+                         #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required/>
+                  <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+                    <div *ngIf="firstName.errors.required">First Name is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" class="form-control" name="email" [(ngModel)]="modelAdd.username" #username="ngModel"
+                         required/>
+                  <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
+                    <div *ngIf="username.errors.required">User Name is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" name="password" [(ngModel)]="modelAdd.password"
+                         #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required/>
+                  <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                    <div *ngIf="password.errors.required">Password is required</div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+      <div class="jumbotron">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              <h3>Get Users</h3>
+              <form name="form" (ngSubmit)="getUsers()" novalidate>
+                <div class="form-group">
+                  <label >User Name</label>
+                  <mat-checkbox>Get by username</mat-checkbox>
+                  <input type="text" class="form-control" name="username" #username="ngModel" [(ngModel)]="modelGet.username" [ngClass]="{ 'is-invalid': f.submitted }" required />
+                  <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
+                    <div *ngIf="username.errors.required">First Name is required</div>
+                  </div>
+                  <textarea class="form-control" name="allUsers" [(ngModel)]="modelGet.allUsers" placeholder="all users"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <button class="btn btn-primary">Register</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
 

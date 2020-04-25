@@ -4,7 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APPService } from './shared/app.service';
-import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {HttpClientModule} from '@angular/common/http';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
@@ -13,7 +18,11 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    BrowserAnimationsModule,
+    FormsModule,
+    MatGridListModule,
+    HttpClientModule,
+    MatCheckboxModule,
   ],
   providers: [APPService],
   bootstrap: [AppComponent]

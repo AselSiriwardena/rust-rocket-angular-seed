@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { APPService } from './shared/app.service';
 
 @Component({
@@ -6,16 +6,27 @@ import { APPService } from './shared/app.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  implements OnInit {
-  data ="";
-  constructor(private appService:APPService){}
-
-  ngOnInit(): void {
-    this.appService.getResponse().subscribe(
-      (data:any)=>{
-        this.data=data;
-      }
-    )
-  }
+export class AppComponent {
+  constructor(private appService: APPService) {}
   title = 'ui';
+
+  modelAdd: any = {};
+  modelGet: any = {};
+
+  addUsers() {
+    this.appService.addUser(this.modelAdd).subscribe(
+      (data: any) => {
+        console.log(data);
+      }
+    );
+  }
+
+  getUsers() {
+    this.appService.getAllUsers().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.modelGet.allUsers = JSON.stringify(data);
+      }
+    );
+  }
 }
