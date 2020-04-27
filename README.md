@@ -28,6 +28,19 @@ Install rust nightly to your environment
 rustup default nightly
 ```
 
+then install diesel for migrations
+```
+cargo install diesel_cli — no-default-features — features postgre
+```
+
+change your credentials in .env file
+
+Then run below command for setup your DB and tables
+```
+diesel setup
+diesel migration generate users
+```
+
 next you need to navigate into ui folder.Then run 
 
 ```
