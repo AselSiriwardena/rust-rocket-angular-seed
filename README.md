@@ -13,12 +13,10 @@ For more understanding, read [rest-api-in-rust-step-by-step-guide](https://mediu
 
 ## Getting Started
 
-
 ### Prerequisites
 
 * [Rust](https://www.rust-lang.org/learn/get-started) ( Nightly version)
 * [Node.js](https://nodejs.org/) (version 10 or higher)
-
 
 ### Installing
 
@@ -29,30 +27,31 @@ rustup default nightly
 ```
 
 then install diesel for migrations,
+
 ```
 cargo install diesel_cli — no-default-features — features postgre
 ```
 
 change your credentials in .env file.
-
 Then run below command for setup your DB and tables.
+
 ```
 diesel setup
 diesel migration generate users
 ```
 
-Next you need to navigate into UI folder. Then run 
+Next you need to navigate into UI folder. Then run,
 
 ```
 cd ui
 npm install
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
+End with an example of getting some data out of the system or using it for a little demonstration.
 
 
 ## Deployment
-Run command below in root directory to start the application.
+Run the command below in root directory to start the application.
 
 ````
 cargo run
@@ -62,10 +61,10 @@ cargo run
 
 * **Asel Siriwardena** - [GITHUB](https://github.com/AselSiriwardena)
 
-See also the list of [contributors](https://github.com/AselSiriwardena/rust-rocket-angular-seed/graphs/contributors) who participated in this project.
+Also see the list of [contributors](https://github.com/AselSiriwardena/rust-rocket-angular-seed/graphs/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for more details
 
 ![image](./readme_img/ui.png)
