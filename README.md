@@ -19,7 +19,6 @@ For more understanding, read [rest-api-in-rust-step-by-step-guide](https://mediu
 * [Rust](https://www.rust-lang.org/learn/get-started) ( Nightly version)
 * [Node.js](https://nodejs.org/) (version 10 or higher)
 
-
 ### Installing
 
 Install rust nightly to your environment, 
@@ -29,6 +28,7 @@ rustup default nightly
 ```
 
 then install diesel for migrations,
+
 ```
 cargo install diesel_cli — no-default-features — features postgre
 ```
@@ -49,7 +49,6 @@ npm install
 ```
 
 End with an example of getting some data out of the system or using it for a little demo.
-
 
 ## Deployment
 Run command below in root directory to start the application.
