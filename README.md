@@ -22,37 +22,37 @@ For more understanding, read [rest-api-in-rust-step-by-step-guide](https://mediu
 
 ### Installing
 
-Install rust nightly to your environment 
+Install rust nightly to your environment, 
 
 ```
 rustup default nightly
 ```
 
-then install diesel for migrations
+then install diesel for migrations,
 ```
 cargo install diesel_cli — no-default-features — features postgre
 ```
 
-change your credentials in .env file
+change your credentials in .env file.
 
-Then run below command for setup your DB and tables
+Then run below command for setup your DB and tables.
 ```
 diesel setup
 diesel migration generate users
 ```
 
-next you need to navigate into ui folder.Then run 
+Next you need to navigate into UI folder. Then run 
 
 ```
 cd ui
 npm install
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+End with an example of getting some data out of the system or using it for a little demo.
 
 
 ## Deployment
-Run command below in root directory to start the application
+Run command below in root directory to start the application.
 
 ````
 cargo run
